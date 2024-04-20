@@ -1,0 +1,50 @@
+---
+import EducationIcon from "./icons/EducationIcon.astro";
+import EducationCard from "./EducationCard.astro";
+const EDUCATION = [
+    {
+        title: "Grado en Ingeniería Informática",
+        place: "Universidad Politecnica de Córdoba",
+        placeColor: "text-purple-300",
+        description:
+            "Mención en computación aunque actualmente estoy enfocado tanto en desarrollo web como en data science.",
+        logos: [
+            "https://www.uco.es/internacional/extranjeros//templates/uco/images/logo.png",
+            "https://www.uco.es/eps/images/logos/SimboloEPSC.png",
+        ],
+        date: "2019 - 2024",
+    },
+    {
+        title: "Certificado de Inglés (Nivel B2)",
+        place: "Academia Británica Acabri",
+        placeColor: "text-yellow-200",
+        description: "",
+        logos: [
+            "https://acabri.com/wp-content/uploads/2023/05/Logo-trans-fondo-OK-AB-01-300x106.png",
+        ],
+        date: "2024 - 2024",
+    },
+    {
+        title: "Resolución de problemas de programación",
+        place: "LeetCode",
+        placeColor: "text-orange-300",
+        description:
+            "Actualmente resolviendo problemas de LeetCode con Python3.",
+        logos: [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/LeetCode_Logo_black_with_text.svg/1280px-LeetCode_Logo_black_with_text.svg.png",
+        ],
+        date: "2024 - Actualidad",
+    },
+];
+---
+
+<nav class="flex justify-start items-center gap-x-2 text-sm">
+    <EducationIcon class="size-6 text-white" />
+    <h2 class="text-md font-semibold">Educación</h2>
+    <div class="h-[2px] w-full bg-white"></div>
+</nav>
+<section
+    class="flex flex-col justify-center items-center text-sm mt-10 gap-y-20 px-4"
+>
+    {EDUCATION.map((education) => <EducationCard education={education} />)}
+</section>

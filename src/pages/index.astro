@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionItem from "../components/SectionItem.astro";
+import AboutMe from "../components/AboutMe.astro";
+import Education from "../components/Education.astro";
+import Experience from "../components/Experience.astro";
+---
+
+<Layout title="Welcome to Astro.">
+	<main
+		class="min-h-screen w-full p-3 md:w-[750px] mx-auto text-white flex flex-col justify-center items-center gap-5"
+	>
+		<SectionItem id="sobremi">
+			<AboutMe />
+		</SectionItem>
+
+		<SectionItem id="educacion">
+			<Education />
+		</SectionItem>
+
+		<SectionItem id="experiencia">
+			<Experience />
+		</SectionItem>
+	</main>
+</Layout>

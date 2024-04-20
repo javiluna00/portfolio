@@ -1,0 +1,49 @@
+---
+import ExperienceIcon from "./icons/ExperienceIcon.astro";
+import ExperienceCard from "./ExperienceCard.astro";
+const EXPERIENCE = [
+    {
+        title: "Fullstack Developer",
+        where: "Mi propio TFG",
+        duration: "Enero 2024 - Actualidad",
+        description:
+            "Desarrollo de una aplicación web con React, Laravel, MySQL, Tailwind CSS, Recoil y más.",
+    },
+    {
+        title: "Fullstack Developer",
+        where: "Aicor Consultores",
+        logo: "https://digitour-project.eu/_cms/wp-content/uploads/2022/10/logo-aicor..png",
+        duration: "Junio 2023 - Septiembre 2023",
+        description:
+            "Prácticas curriculares. Desarrollo fullstack con React y Laravel. Desarrollo con Wordpress. Aprendizaje de metodologías en un entorno profesional.",
+    },
+    {
+        title: "Frontend Developer",
+        where: "Camping La Albolafia",
+        logo: "https://www.campinglaalbolafia.com/assets/img/logo.png",
+        duration: "Enero 2021 - Enero 2021",
+        description:
+            "Desarrollo de una web estática para mostrar el camping, así como los horarios y los precios. Despliegue de la web en servidor de producción.",
+    },
+];
+---
+
+<nav class="flex justify-start items-center gap-x-2 text-sm">
+    <ExperienceIcon class="size-6 text-white" />
+    <h2 class="text-md font-semibold">Experiencia</h2>
+    <div class="h-[2px] w-full bg-white"></div>
+</nav>
+
+<section
+    class="flex flex-col justify-center items-center text-sm mt-10 gap-y-20"
+>
+    <div class="w-full">
+        <!-- Item -->
+
+        {
+            EXPERIENCE.map((experience) => (
+                <ExperienceCard experience={experience} />
+            ))
+        }
+    </div>
+</section>

@@ -1,0 +1,55 @@
+---
+import Pill from "./Pill.astro";
+import LinkedinIcon from "./icons/LinkedinIcon.astro";
+---
+
+<div
+    class="w-full flex justify-center items-center md:justify-start md:items-center"
+>
+    <img
+        class="size-12 rounded-full my-2"
+        src="https://media.licdn.com/dms/image/D4D35AQHUgVRc1NMI2g/profile-framedphoto-shrink_200_200/0/1674477936590?e=1714215600&v=beta&t=h4AqQSlDCkYutjfBz7Cq6j2bmrUFknird-jG_qlWzUs"
+    />
+</div>
+<div class="flex flex-col md:flex-row justify-start items-center gap-x-3">
+    <h2 class="text-2xl md:text-4xl font-semibold py-3">
+        Hola, soy
+        <span class="relative">
+            <span class="text-purple-400 group">Javi Luna</span>
+            <span
+                class="absolute inset-0 -z-[1] rounded-full w-full h-10 bg-purple-500/30 blur-xl opacity-100 group-hover:opacity-100 transition"
+            ></span>
+        </span>
+    </h2>
+    <Pill class="ml-2 bg-green-500/30 border border-green-500/80">
+        <p class="text-xs text-green-200">Open to work</p>
+    </Pill>
+</div>
+<p class="text-md md:text-xl text-pretty mt-3 text-center md:text-start">
+    Soy un apasionado de la programación. Ingeniero informático por la <span
+        class="text-sky-200/80"
+        >Universidad Politécnica Superior de Córdoba</span
+    >.
+    <br />Enfocado en el <span class="text-purple-200/80 font-semibold"
+        >desarrollo web</span
+    > y el <span class="text-yellow-200/80 font-semibold">data science</span> 💻.
+</p>
+
+<footer class="w-full flex justify-start items-center gap-x-5 mt-5 px-3">
+    <Pill
+        class="border-2 border-white/80 hover:border-white transition w-max cursor-pointer text-white/80 hover:text-white"
+    >
+        <a href="mailto:javilunac00@gmail.com" class="text-xs font-semibold"
+            >javilunac00@gmail.com</a
+        >
+    </Pill>
+
+    <a
+        href="https://www.linkedin.com/in/javilunac"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-white/80 hover:text-white transition"
+    >
+        <LinkedinIcon class="size-8 stroke-white/80" />
+    </a>
+</footer>
