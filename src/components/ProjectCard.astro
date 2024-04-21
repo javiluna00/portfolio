@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+const { title, description, image, link } = Astro.props.experience;
+---
+
+<header class="w-full flex flex-col justify-center items-start gap-y-3">
+    <h3 class="text-xl font-semibold">{title}</h3>
+    <p class="text-sm">{description}</p>
+    <a
+        href={link}
+        target="_blank"
+        class="text-sm px-4 py-2 bg-white text-zinc-950 rounded-lg hover:scale-110 duration-300"
+        >Ir a la web</a
+    >
+</header>
+<section class="mt-5">
+    <Image
+        class="w-full h-full object-cover rounded-lg"
+        src={image}
+        alt={`Imagen de ${title}`}
+    />
+</section>

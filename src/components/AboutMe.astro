@@ -1,14 +1,17 @@
 ---
 import Pill from "./Pill.astro";
 import LinkedinIcon from "./icons/LinkedinIcon.astro";
+import JaviPhoto from "./assets/images/javi.jpg";
+import { Image } from "astro:assets";
 ---
 
 <div
     class="w-full flex justify-center items-center md:justify-start md:items-center"
 >
-    <img
+    <Image
         class="size-12 rounded-full my-2"
-        src="https://media.licdn.com/dms/image/D4D35AQHUgVRc1NMI2g/profile-framedphoto-shrink_200_200/0/1674477936590?e=1714215600&v=beta&t=h4AqQSlDCkYutjfBz7Cq6j2bmrUFknird-jG_qlWzUs"
+        src={JaviPhoto}
+        alt="Foto de Javi Luna"
     />
 </div>
 <div class="flex flex-col md:flex-row justify-start items-center gap-x-3">
