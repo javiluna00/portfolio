@@ -4,7 +4,7 @@ import Pill from "./Pill.astro";
 const { experience } = Astro.props;
 ---
 
-<div class="flex gap-x-3">
+<div class="w-full flex gap-x-3">
     <div
         class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-[2px] after:-translate-x-[0.5px] after:bg-white"
     >
@@ -15,7 +15,7 @@ const { experience } = Astro.props;
         </div>
     </div>
 
-    <div class="pt-1 pb-8">
+    <div class="w-full pt-1 pb-8">
         <Pill class="bg-purple-500/30 border border-purple-500/80 w-max mb-2">
             <span class="text-xs">{experience.duration}</span>
         </Pill>
@@ -49,7 +49,7 @@ const { experience } = Astro.props;
 
         {
             experience.skills && (
-                <div class="flex justify-start items-center gap-x-3 mt-3">
+                <div class="mt-2 w-full flex flex-wrap gap-x-2 gap-y-2">
                     {experience.skills.map((skill) => {
                         return (
                             <Pill class="bg-white/30  w-max select-none">
