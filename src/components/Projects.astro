@@ -1,5 +1,6 @@
 ---
 import CampingImage from "./assets/images/campingalbolafia.png";
+import LambdaImage from "./assets/images/lambdapage.png";
 import ProjectCard from "./ProjectCard.astro";
 import ProjectIcon from "./icons/ProjectIcon.astro";
 const PROJECTS = [
@@ -9,6 +10,12 @@ const PROJECTS = [
             "Desarrollo desde cero del sitio web de Camping La Albolafia. Página estática realizada con HTML5, CSS, Javascript y Bootstrap.",
         image: CampingImage,
         link: "https://campinglaalbolafia.com/",
+    },
+    {
+        title: "Lambda Beats Web",
+        description:
+            "Mi TFG. Desarrollo de una aplicación web para venta de instrumentales online. Pasarela de pago con Stripe y Webhooks. Autenticación con JWT. Frontend con React y Tailwind y backend con Laravel.",
+        image: LambdaImage,
     },
 ];
 ---
@@ -22,7 +29,7 @@ const PROJECTS = [
 <section
     class="flex flex-col justify-center items-center text-sm mt-10 gap-y-20"
 >
-    <div class="w-full px-5">
+    <div class="w-full flex flex-col justify-start items-start gap-y-10">
         <!-- Item -->
 
         {PROJECTS.map((experience) => <ProjectCard experience={experience} />)}

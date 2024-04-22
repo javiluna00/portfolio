@@ -1,6 +1,7 @@
 ---
 import Pill from "./Pill.astro";
 import LinkedinIcon from "./icons/LinkedinIcon.astro";
+import GithubIcon from "./icons/GithubIcon.astro";
 import JaviPhoto from "./assets/images/javi.jpg";
 import { Image } from "astro:assets";
 ---
@@ -41,7 +42,8 @@ import { Image } from "astro:assets";
 
 <footer class="w-full flex justify-start items-center gap-x-5 mt-5 px-3">
     <Pill
-        class="border-2 border-white/80 hover:border-white transition w-max cursor-pointer text-white/80 hover:text-white"
+        data-tooltip-target="email"
+        class="border-2 border-white/80 hover:border-white w-max cursor-pointer text-white/80 hover:text-white hover:scale-110 transition"
     >
         <a href="mailto:javilunac00@gmail.com" class="text-xs font-semibold"
             >javilunac00@gmail.com</a
@@ -52,8 +54,17 @@ import { Image } from "astro:assets";
         href="https://www.linkedin.com/in/javilunac"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-white/80 hover:text-white transition"
+        class="text-white/80 hover:text-white hover:scale-110 transition"
     >
         <LinkedinIcon class="size-8 stroke-white/80" />
+    </a>
+
+    <a
+        href="https://github.com/javiluna00"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-white/80 hover:text-white hover:scale-110 transition"
+    >
+        <GithubIcon class="size-8 stroke-white/80" />
     </a>
 </footer>

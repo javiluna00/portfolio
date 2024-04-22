@@ -46,6 +46,20 @@ const { experience } = Astro.props;
                 />
             )
         }
+
+        {
+            experience.skills && (
+                <div class="flex justify-start items-center gap-x-3 mt-3">
+                    {experience.skills.map((skill) => {
+                        return (
+                            <Pill class="bg-white/30  w-max select-none">
+                                <span class="text-xs">{skill}</span>
+                            </Pill>
+                        );
+                    })}
+                </div>
+            )
+        }
     </div>
     <!-- End Right Content -->
 </div>
