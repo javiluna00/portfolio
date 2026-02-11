@@ -1,44 +1,49 @@
 ---
 import CampingImage from "./assets/images/campingalbolafia.png";
 import LambdaImage from "./assets/images/lambdapage.png";
+import CounterImage from "./assets/images/counterstrike.png";
 import ProjectCard from "./ProjectCard.astro";
 import ProjectIcon from "./icons/ProjectIcon.astro";
-import CounterImage from "./assets/images/counterstrike.png";
+import SantamariaImage from "./assets/images/santamaria.png";
 const PROJECTS = [
     {
+        title: "Bar Santa María",
+        description: "Sitio web optimizado para SEO y rendimiento. Arquitectura estática enfocada en la experiencia de usuario y tiempos de carga mínimos.",
+        image: SantamariaImage,
+        tags: ["Astro", "Tailwind CSS", "SEO"],
+        link: "https://barsantamaria.es/",
+    },
+    {
+        title: "Lambda Beats - SaaS Platform",
+        description: "Plataforma Fullstack para la gestión y venta de instrumentales. Implementa una arquitectura robusta con pasarela de pagos, gestión de licencias digitales y sistema de autenticación seguro.",
+        image: LambdaImage,
+        tags: ["React", "Laravel", "Stripe", "MySQL", "Tailwind"],
+        isTFG: true
+    },
+    {
         title: "Camping La Albolafia",
-        description:
-            "Desarrollo desde cero del sitio web de Camping La Albolafia. Página estática realizada con HTML5, CSS, Javascript y Bootstrap.",
+        description: "Sitio corporativo optimizado para SEO y rendimiento. Arquitectura estática enfocada en la experiencia de usuario y tiempos de carga mínimos.",
         image: CampingImage,
+        tags: ["HTML5", "CSS3", "JS", "Bootstrap"],
         link: "https://campinglaalbolafia.com/",
     },
     {
-        title: "Lambda Beats Web",
-        description:
-            "Mi TFG. Desarrollo de una aplicación web para venta de instrumentales online. Pasarela de pago con Stripe y Webhooks. Autenticación con JWT. Frontend con React y Tailwind y backend con Laravel.",
-        image: LambdaImage,
-    },
-    {
-        title: "Plugins & Mods para Counter Strike 1.6",
-        description:
-            "Desarrollo de plugins y mods a medida para el juego Counter Strike 1.6.",
+        title: "CS 1.6 Engine Modding",
+        description: "Desarrollo de lógica de servidor y plugins a bajo nivel. Optimización de eventos en tiempo real y scripting de sistemas para entornos competitivos.",
         image: CounterImage,
+        tags: ["Pawn", "C++", "Game Dev", "Optimization"],
     },
 ];
 ---
 
-<nav class="flex justify-start items-center gap-x-2 text-sm">
-    <ProjectIcon class="size-6 text-white" />
-    <h2 class="text-md font-semibold">Proyectos</h2>
-    <div class="h-[2px] w-full bg-white"></div>
-</nav>
+<div id="projects" class="mt-32 mb-20">
+    <nav class="flex justify-start items-center gap-x-4 mb-12">
+        <ProjectIcon class="size-8 text-yellow-400" />
+        <h2 class="text-3xl font-bold tracking-tight">Proyectos Destacados</h2>
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-yellow-500/50 to-transparent"></div>
+    </nav>
 
-<section
-    class="flex flex-col justify-center items-center text-sm mt-10 gap-y-20"
->
-    <div class="w-full flex flex-col justify-start items-start gap-y-10">
-        <!-- Item -->
-
-        {PROJECTS.map((experience) => <ProjectCard experience={experience} />)}
-    </div>
-</section>
+    <section class="grid grid-cols-1 gap-y-24">
+        {PROJECTS.map((project) => <ProjectCard project={project} />)}
+    </section>
+</div>

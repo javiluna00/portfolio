@@ -1,50 +1,111 @@
 ---
 import EducationIcon from "./icons/EducationIcon.astro";
 import EducationCard from "./EducationCard.astro";
+
 const EDUCATION = [
     {
         title: "Grado en Ingeniería Informática",
-        place: "Universidad Politecnica de Córdoba",
+        place: "Universidad de Córdoba (EPSC)",
         placeColor: "text-purple-300",
-        description:
-            "Mención en computación aunque actualmente estoy enfocado tanto en desarrollo web como en data science.",
-        logos: [
-            "https://www.uco.es/internacional/extranjeros//templates/uco/images/logo.png",
-            "https://www.uco.es/eps/images/logos/SimboloEPSC.png",
-        ],
-        date: "2019 - 2024",
+        description: "Especialidad en Computación. Formación avanzada en algoritmia, estructuras de datos y arquitectura de sistemas.",
+        logos: ["https://www.uco.es/eps/images/logos/SimboloEPSC.png"],
+        date: "2019 — 2024",
     },
     {
-        title: "Certificado de Inglés (Nivel B2)",
+        title: "Resolución de Problemas Algorítmicos",
+        place: "LeetCode & NeetCode",
+        placeColor: "text-orange-300",
+        description: "Enfoque en patrones de diseño de algoritmos y optimización de eficiencia temporal/espacial.",
+        logos: ["https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/LeetCode_Logo_black_with_text.svg/1280px-LeetCode_Logo_black_with_text.svg.png"],
+        date: "Actualidad",
+    },
+    {
+        title: "English Certificate (B2)",
         place: "Academia Británica Acabri",
         placeColor: "text-yellow-200",
-        description: "",
-        logos: [
-            "https://acabri.com/wp-content/uploads/2023/05/Logo-trans-fondo-OK-AB-01-300x106.png",
-        ],
-        date: "2024 - 2024",
-    },
-    {
-        title: "Resolución de problemas de programación",
-        place: "LeetCode",
-        placeColor: "text-orange-300",
-        description:
-            "Actualmente resolviendo problemas de LeetCode con Python3.",
-        logos: [
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/LeetCode_Logo_black_with_text.svg/1280px-LeetCode_Logo_black_with_text.svg.png",
-        ],
-        date: "2024 - Actualidad",
+        description: "Competencia profesional en comunicación técnica.",
+        logos: ["https://acabri.com/wp-content/uploads/2023/05/Logo-trans-fondo-OK-AB-01-300x106.png"],
+        date: "2024",
     },
 ];
 ---
 
-<nav class="flex justify-start items-center gap-x-2 text-sm">
-    <EducationIcon class="size-6 text-white" />
-    <h2 class="text-md font-semibold">Educación</h2>
-    <div class="h-[2px] w-full bg-white"></div>
-</nav>
-<section
-    class="flex flex-col justify-center items-center text-sm mt-10 gap-y-20 px-4"
->
-    {EDUCATION.map((education) => <EducationCard education={education} />)}
-</section>
+<div id="education-section" class="mt-24 mb-32 relative">
+    <nav class="flex justify-start items-center gap-x-4 mb-16">
+        <EducationIcon class="size-8 text-purple-400" />
+        <h2 class="text-3xl font-bold tracking-tighter">Educación</h2>
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-purple-500/50 to-transparent"></div>
+    </nav>
+
+    <div class="relative px-2 md:px-10">
+        
+        <div class="absolute left-4 md:left-[50%] top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2"></div>
+        
+        <div id="progress-line" class="absolute left-4 md:left-[50%] top-0 w-[2px] bg-gradient-to-b from-purple-500 via-indigo-400 to-purple-600 -translate-x-1/2 origin-top scale-y-0"></div>
+
+        <section class="flex flex-col gap-y-20">
+            {EDUCATION.map((edu, index) => (
+                <div class={`edu-item flex flex-col md:flex-row w-full items-center opacity-0 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                    
+                    <div class="hidden md:block md:w-1/2"></div>
+                    
+                    <div class="absolute left-4 md:left-1/2 size-4 bg-slate-950 border-2 border-purple-500 rounded-full -translate-x-1/2 z-10 shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
+                    
+                    <div class="w-full md:w-1/2 pl-12 md:pl-0 md:px-12">
+                        <EducationCard education={edu} />
+                    </div>
+                </div>
+            ))}
+        </section>
+    </div>
+</div>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const initTimeline = () => {
+        // 1. Animación de la línea de progreso
+        gsap.to("#progress-line", {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#education-section",
+                start: "top 70%",
+                end: "bottom 80%",
+                scrub: 1,
+            }
+        });
+
+        // 2. Animación de las tarjetas y puntos
+        const items = document.querySelectorAll(".edu-item");
+        
+        items.forEach((item, index) => {
+            gsap.to(item, {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+    };
+
+    document.addEventListener('DOMContentLoaded', initTimeline);
+    document.addEventListener('astro:page-load', initTimeline);
+</script>
+
+<style>
+    /* Ajustes para móviles: la línea se queda a la izquierda */
+    @media (max-width: 768px) {
+        .edu-item {
+            align-items: flex-start !important;
+        }
+    }
+</style>

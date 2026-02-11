@@ -1,21 +1,21 @@
 ---
 import ExperienceIcon from "./icons/ExperienceIcon.astro";
 import ExperienceCard from "./ExperienceCard.astro";
+
 const EXPERIENCE = [
     {
         title: "Software Developer",
-        where:"PrimeIT",
-        logo:"https://media.licdn.com/dms/image/D4D0BAQE-bvPVaIiC_Q/company-logo_200_200/0/1688397241467/primeit_espaa_logo?e=2147483647&v=beta&t=gGikvVwTtVuAfGnaTOPcNBuVkXaPVU8n2Hbb32Cinl8",
+        where: "PrimeIT",
+        logo: "https://media.licdn.com/dms/image/D4D0BAQE-bvPVaIiC_Q/company-logo_200_200/0/1688397241467/primeit_espaa_logo?e=2147483647&v=beta&t=gGikvVwTtVuAfGnaTOPcNBuVkXaPVU8n2Hbb32Cinl8",
         duration: "Abril 2024 - Actualidad",
-        description : "Desarrollo de aplicación web con Javascript y MeteorJS",
+        description: "Desarrollo de aplicación web con Javascript y MeteorJS",
         skills: ["Javascript", "MeteorJS", "Git/Github", "CSS"]
     },
     {
         title: "Fullstack Developer",
         where: "Mi propio TFG",
         duration: "Enero 2024 - Actualidad",
-        description:
-            "Desarrollo de una aplicación web con React, Laravel, MySQL, Tailwind CSS, Recoil y más.",
+        description: "Desarrollo de una aplicación web con React, Laravel, MySQL, Tailwind CSS, Recoil y más.",
         skills: ["React", "Laravel", "MySQL", "Tailwind CSS", "Recoil"],
     },
     {
@@ -23,8 +23,7 @@ const EXPERIENCE = [
         where: "Aicor Consultores",
         logo: "https://digitour-project.eu/_cms/wp-content/uploads/2022/10/logo-aicor..png",
         duration: "Junio 2023 - Septiembre 2023",
-        description:
-            "Prácticas curriculares. Desarrollo fullstack con React y Laravel. Desarrollo con Wordpress. Aprendizaje de metodologías en un entorno profesional.",
+        description: "Prácticas curriculares. Desarrollo fullstack con React y Laravel. Desarrollo con Wordpress. Aprendizaje de metodologías en un entorno profesional.",
         skills: ["React", "Laravel", "Wordpress"],
     },
     {
@@ -32,29 +31,127 @@ const EXPERIENCE = [
         where: "Camping La Albolafia",
         logo: "https://www.campinglaalbolafia.com/assets/img/logo.png",
         duration: "Enero 2021 - Enero 2021",
-        description:
-            "Desarrollo de una web estática para mostrar el camping, así como los horarios y los precios. Despliegue de la web en servidor de producción.",
+        description: "Desarrollo de una web estática para mostrar el camping, así como los horarios y los precios. Despliegue de la web en servidor de producción.",
         skills: ["HTML", "CSS", "Javascript"],
     }
 ];
 ---
 
-<nav class="flex justify-start items-center gap-x-2 text-sm">
-    <ExperienceIcon class="size-6 text-white" />
-    <h2 class="text-md font-semibold">Experiencia</h2>
-    <div class="h-[2px] w-full bg-white"></div>
-</nav>
+<div id="experience-container" class="mt-32 mb-56 relative">
+    <nav class="flex justify-start items-center gap-x-4 mb-20">
+        <ExperienceIcon class="size-8 text-indigo-400" />
+        <h2 class="text-3xl font-bold tracking-tight text-white">Experiencia</h2>
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-indigo-500/50 to-transparent"></div>
+    </nav>
 
-<section
-    class="flex flex-col justify-center items-center text-sm mt-10 gap-y-20"
->
-    <div class="w-full">
-        <!-- Item -->
+    <div class="relative max-w-4xl mx-auto">
+        <div class="absolute left-0 md:left-8 top-0 bottom-0 w-[2px] bg-white/5"></div>
+        <div 
+            id="experience-progress" 
+            class="absolute left-0 md:left-8 top-0 w-[2px] bg-gradient-to-b from-indigo-400 via-purple-500 to-blue-500 origin-top scale-y-0 shadow-[0_0_15px_rgba(99,102,241,0.5)]"
+        ></div>
 
-        {
-            EXPERIENCE.map((experience) => (
-                <ExperienceCard experience={experience} />
-            ))
-        }
+        <div class="space-y-24">
+            {EXPERIENCE.map((experience) => (
+                <div class="experience-item relative pl-10 md:pl-24 opacity-0">
+                    
+                    <div class="absolute left-[-15px] md:left-[-7px] top-0 z-20">
+                        <div class="exp-dot size-8 md:size-12 rounded-xl bg-slate-950 border-2 border-indigo-500/30 flex items-center justify-center overflow-hidden shadow-xl bg-white">
+                            {experience.logo ? (
+                                <img src={experience.logo} alt={experience.where} class="size-full object-contain p-1" />
+                            ) : (
+                                <div class="text-[10px] font-bold text-indigo-400">DEV</div>
+                            )}
+                        </div>
+                    </div>
+
+                    <div class="exp-content">
+                        <ExperienceCard experience={experience} />
+                    </div>
+                </div>
+            ))}
+        </div>
     </div>
-</section>
+</div>
+
+<style>
+    .exp-content {
+        will-change: filter, transform, opacity;
+        backface-visibility: hidden;
+    }
+
+    /* Animación sutil de pulso para indicar el puesto actual */
+    .experience-item:first-child .exp-dot {
+        border-color: rgba(129, 140, 248, 0.8);
+        box-shadow: 0 0 20px rgba(129, 140, 248, 0.2);
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const initExperience = () => {
+        const container = document.querySelector("#experience-container");
+        if (!container) return;
+
+        // 1. Animación de la línea de tiempo
+        gsap.to("#experience-progress", {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#experience-container",
+                start: "top 70%",
+                end: "bottom 80%",
+                scrub: 0.5,
+            }
+        });
+
+        // 2. Animación de revelado de cada ítem
+        const items = document.querySelectorAll(".experience-item");
+        
+        items.forEach((item) => {
+            const dot = item.querySelector(".exp-dot");
+            const content = item.querySelector(".exp-content");
+
+            // Estado inicial forzado para evitar parpadeos (FOUC)
+            gsap.set(content, { 
+                filter: "blur(15px)", 
+                opacity: 0, 
+                x: 30 
+            });
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse",
+                }
+            });
+
+            tl.to(item, {
+                opacity: 1,
+                duration: 0.5
+            })
+            .from(dot, {
+                scale: 0,
+                rotation: -30,
+                duration: 0.8,
+                ease: "back.out(1.7)"
+            }, "-=0.3")
+            .to(content, {
+                filter: "blur(0px)",
+                opacity: 1,
+                x: 0,
+                duration: 1.8,   // Revelado de blur prolongado y cinemático
+                ease: "expo.out" // Suavizado extremo al final
+            }, "-=0.7"); // Empieza a revelarse mientras el dot termina de aparecer
+        });
+    };
+
+    // Soporte para Astro View Transitions y carga inicial
+    document.addEventListener('DOMContentLoaded', initExperience);
+    document.addEventListener('astro:page-load', initExperience);
+</script>
