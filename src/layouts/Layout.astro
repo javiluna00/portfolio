@@ -21,7 +21,7 @@ const { title } = Astro.props;
         <div class="fixed inset-0 -z-10 h-full w-full bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
 
         <TopBar />
-        
+
         <main class="flex flex-col items-center justify-center w-full px-4 mt-16">
             <div class="w-full max-w-[750px]">
                  <slot />
@@ -29,6 +29,64 @@ const { title } = Astro.props;
         </main>
 
         <Footer />
+
+        <script>
+            import { translations } from '../i18n/translations';
+            import type { Lang } from '../i18n/translations';
+
+            declare global {
+                interface Window {
+                    setLanguage: (lang: Lang) => void;
+                }
+            }
+
+            function getByPath(obj: Record<string, unknown>, path: string): string | undefined {
+                const value = path.split('.').reduce((acc: unknown, key: string) => {
+                    if (acc === null || acc === undefined) return undefined;
+                    return (acc as Record<string, unknown>)[key];
+                }, obj as unknown);
+                return typeof value === 'string' ? value : undefined;
+            }
+
+            function applyTranslations(lang: Lang) {
+                const t = translations[lang] as unknown as Record<string, unknown>;
+
+                document.querySelectorAll<HTMLElement>('[data-i18n]').forEach(el => {
+                    const key = el.dataset.i18n!;
+                    const value = getByPath(t, key);
+                    if (value !== undefined) el.textContent = value;
+                });
+
+                document.querySelectorAll<HTMLElement>('[data-i18n-html]').forEach(el => {
+                    const key = el.dataset.i18nHtml!;
+                    const value = getByPath(t, key);
+                    if (value !== undefined) el.innerHTML = value;
+                });
+
+                document.documentElement.lang = lang;
+
+                document.querySelectorAll<HTMLElement>('[data-lang-btn]').forEach(btn => {
+                    const isActive = btn.dataset.langBtn === lang;
+                    btn.classList.toggle('lang-active', isActive);
+                });
+            }
+
+            function detectLanguage(): Lang {
+                const saved = localStorage.getItem('portfolio-lang') as Lang | null;
+                if (saved === 'es' || saved === 'en') return saved;
+                return navigator.language?.toLowerCase().startsWith('en') ? 'en' : 'es';
+            }
+
+            window.setLanguage = (lang: Lang) => {
+                localStorage.setItem('portfolio-lang', lang);
+                applyTranslations(lang);
+            };
+
+            const initI18n = () => applyTranslations(detectLanguage());
+
+            document.addEventListener('DOMContentLoaded', initI18n);
+            document.addEventListener('astro:page-load', initI18n);
+        </script>
     </body>
 </html>
 

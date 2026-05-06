@@ -5,7 +5,106 @@ import CounterImage from "./assets/images/counterstrike.png";
 import ProjectCard from "./ProjectCard.astro";
 import ProjectIcon from "./icons/ProjectIcon.astro";
 import SantamariaImage from "./assets/images/santamaria.png";
+
+const RAG_VISUAL = `
+<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-950 p-5 font-mono text-[10px]">
+  <div class="flex flex-col gap-2.5 w-full">
+    <div class="flex items-center gap-2">
+      <div class="px-2 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-lg text-blue-400 text-center flex-1">📄 Documentos</div>
+      <span class="text-zinc-600 flex-shrink-0">→</span>
+      <div class="px-2 py-1.5 bg-purple-500/10 border border-purple-500/20 rounded-lg text-purple-400 text-center flex-1">🔢 Embeddings</div>
+      <span class="text-zinc-600 flex-shrink-0">→</span>
+      <div class="px-2 py-1.5 bg-yellow-500/10 border border-yellow-500/20 rounded-lg text-yellow-400 text-center flex-1">🗄️ FAISS</div>
+    </div>
+    <div class="flex items-center justify-center">
+      <div class="h-5 w-px bg-zinc-700"></div>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="px-2 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400 text-center flex-1">💬 Pregunta</div>
+      <span class="text-zinc-600 flex-shrink-0">→</span>
+      <div class="px-2 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400 text-center flex-1">🔍 Retrieval k=3</div>
+      <span class="text-zinc-600 flex-shrink-0">→</span>
+      <div class="px-2 py-1.5 bg-orange-500/10 border border-orange-500/20 rounded-lg text-orange-400 text-center flex-1">🤖 GPT-4o</div>
+    </div>
+    <div class="text-center text-zinc-600 pt-1">RAG · LangChain · FAISS · OpenAI</div>
+  </div>
+</div>`;
+
+const DB_VISUAL = `
+<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-950 p-5 font-mono text-[10px]">
+  <div class="flex flex-col gap-2.5 w-full">
+    <div class="flex items-center gap-2">
+      <div class="px-2 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-lg text-blue-400 text-center flex-1">💬 Pregunta</div>
+      <span class="text-zinc-600 flex-shrink-0">→</span>
+      <div class="px-2 py-1.5 bg-purple-500/10 border border-purple-500/20 rounded-lg text-purple-400 text-center flex-1">🤖 Gemini → SQL</div>
+      <span class="text-zinc-600 flex-shrink-0">→</span>
+      <div class="px-2 py-1.5 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-center flex-1">🛡️ Valida</div>
+    </div>
+    <div class="flex items-center justify-center">
+      <div class="h-5 w-px bg-zinc-700"></div>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="px-2 py-1.5 bg-yellow-500/10 border border-yellow-500/20 rounded-lg text-yellow-400 text-center flex-1">📡 Streaming</div>
+      <span class="text-zinc-600 flex-shrink-0">←</span>
+      <div class="px-2 py-1.5 bg-orange-500/10 border border-orange-500/20 rounded-lg text-orange-400 text-center flex-1">🤖 Interpreta</div>
+      <span class="text-zinc-600 flex-shrink-0">←</span>
+      <div class="px-2 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400 text-center flex-1">🗄️ MySQL</div>
+    </div>
+    <div class="text-center text-zinc-600 pt-1">FastAPI · LangChain · Gemini · MySQL</div>
+  </div>
+</div>`;
+
+const LINKEDIN_VISUAL = `
+<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-950 p-5 font-mono text-[10px]">
+  <div class="flex flex-col items-center gap-2 w-full">
+    <div class="px-3 py-1.5 bg-zinc-700/50 border border-zinc-600 rounded-full text-zinc-400">START</div>
+    <div class="text-zinc-600">↓</div>
+    <div class="px-3 py-2 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-400 text-center w-40">🔍 buscar<br/><span class="text-zinc-600">Tavily Search</span></div>
+    <div class="text-zinc-600">↓</div>
+    <div class="px-3 py-2 bg-purple-500/10 border border-purple-500/20 rounded-xl text-purple-400 text-center w-40">🤖 validar<br/><span class="text-zinc-600">Gemini JSON</span></div>
+    <div class="flex gap-6 items-start mt-0.5">
+      <div class="flex flex-col items-center gap-1.5">
+        <div class="text-zinc-600 text-[9px]">≥10 ofertas</div>
+        <div class="text-zinc-600">↓</div>
+        <div class="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400 text-center w-36">💾 PostgreSQL</div>
+      </div>
+      <div class="flex flex-col items-center gap-1 mt-3">
+        <div class="text-zinc-600 text-[9px]">si no →</div>
+        <div class="text-zinc-600">↑ loop</div>
+      </div>
+    </div>
+    <div class="text-center text-zinc-600 pt-1">LangGraph · Gemini · Tavily · PostgreSQL</div>
+  </div>
+</div>`;
+
 const PROJECTS = [
+    {
+        title: "RAG Chatbot de Soporte Vectorial",
+        description: "Sistema de preguntas y respuestas que recupera información semánticamente de una base de conocimiento FAISS antes de generar respuestas con GPT-4o. Respuestas ancladas a documentación real, sin alucinaciones.",
+        visual: RAG_VISUAL,
+        tags: ["Python", "LangChain", "FAISS", "OpenAI GPT-4o", "RAG"],
+        detailLink: "/proyectos/ai-rag-soporte",
+        githubLink: "https://github.com/javiluna00/ai_database_vectorial",
+        isAI: true,
+    },
+    {
+        title: "Asistente IA para Base de Datos",
+        description: "API REST (FastAPI) que convierte preguntas en lenguaje natural en consultas SQL, las ejecuta en MySQL de forma segura y devuelve respuestas interpretadas en streaming usando Google Gemini.",
+        visual: DB_VISUAL,
+        tags: ["Python", "FastAPI", "LangChain", "Gemini", "MySQL", "Streaming"],
+        detailLink: "/proyectos/ai-database-integration",
+        githubLink: "https://github.com/javiluna00/ai_database_integration",
+        isAI: true,
+    },
+    {
+        title: "Agente Autónomo de Empleo IA",
+        description: "Pipeline multi-agente con LangGraph que busca ofertas de AI Engineer en LinkedIn usando Tavily, las valida y filtra con Gemini en un bucle condicional y las persiste en PostgreSQL.",
+        visual: LINKEDIN_VISUAL,
+        tags: ["Python", "LangGraph", "Gemini", "Tavily", "PostgreSQL"],
+        detailLink: "/proyectos/ai-linkedin",
+        githubLink: "https://github.com/javiluna00/AI_linkedin",
+        isAI: true,
+    },
     {
         title: "Bar Santa María",
         description: "Sitio web optimizado para SEO y rendimiento. Arquitectura estática enfocada en la experiencia de usuario y tiempos de carga mínimos.",
@@ -36,14 +135,14 @@ const PROJECTS = [
 ];
 ---
 
-<div id="projects" class="mt-32 mb-20">
+<div id="projects">
     <nav class="flex justify-start items-center gap-x-4 mb-12">
         <ProjectIcon class="size-8 text-yellow-400" />
-        <h2 class="text-3xl font-bold tracking-tight">Proyectos Destacados</h2>
+        <h2 data-i18n="sections.projects" class="text-3xl font-bold tracking-tight">Proyectos Destacados</h2>
         <div class="h-[1px] flex-1 bg-gradient-to-r from-yellow-500/50 to-transparent"></div>
     </nav>
 
     <section class="grid grid-cols-1 gap-y-24">
-        {PROJECTS.map((project) => <ProjectCard project={project} />)}
+        {PROJECTS.map((project, index) => <ProjectCard project={project} index={index} />)}
     </section>
 </div>

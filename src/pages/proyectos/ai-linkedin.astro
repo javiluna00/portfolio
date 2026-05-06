@@ -1,0 +1,222 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import GithubIcon from "../../components/icons/GithubIcon.astro";
+---
+
+<Layout title="Agente IA LinkedIn | Javi Luna">
+  <div class="py-20 min-h-screen">
+
+    <a href="/" class="inline-flex items-center gap-2 text-slate-500 hover:text-white transition-colors text-sm mb-14 group">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span data-i18n="pages.back">Volver al portfolio</span>
+    </a>
+
+    <!-- Hero -->
+    <header class="mb-20">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="text-xs font-mono bg-purple-500/10 text-purple-400 border border-purple-500/20 px-3 py-1 rounded-full">LangGraph</span>
+        <span class="text-xs font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 px-3 py-1 rounded-full">Multi-agent</span>
+        <span class="text-xs font-mono bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-3 py-1 rounded-full">Automation</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+        <span data-i18n="pages.linkedin.title_line1">Agente Autónomo de</span><br />
+        <span class="text-yellow-400" data-i18n="pages.linkedin.title_line2">Búsqueda de Empleo en LinkedIn</span>
+      </h1>
+      <p data-i18n="pages.linkedin.description" class="text-lg text-slate-400 leading-relaxed max-w-2xl mb-8">
+        Pipeline multi-agente construido con LangGraph que busca
+        automáticamente ofertas de AI Engineer en LinkedIn, las valida y filtra con Gemini y las
+        almacena en PostgreSQL. Un agente que trabaja de forma autónoma con lógica de reintento condicional.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-10">
+        {["Python", "LangGraph", "LangChain", "Google Gemini 2.5 Flash Lite", "Tavily Search", "PostgreSQL", "psycopg2"].map(tag => (
+          <span class="text-xs font-mono bg-zinc-800/80 text-zinc-400 px-3 py-1.5 rounded-lg border border-zinc-700/60">{tag}</span>
+        ))}
+      </div>
+      <a
+        href="https://github.com/javiluna00/AI_linkedin"
+        target="_blank"
+        class="inline-flex items-center gap-2.5 px-5 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-medium rounded-xl border border-zinc-700 hover:border-zinc-500 transition-all duration-200 text-sm"
+      >
+        <GithubIcon class="size-4" />
+        <span data-i18n="pages.github_cta">Ver en GitHub</span>
+      </a>
+    </header>
+
+    <!-- Qué hace -->
+    <section class="mb-16">
+      <h2 data-i18n="pages.linkedin.what_title" class="text-2xl font-bold text-white mb-4">¿Qué problema resuelve?</h2>
+      <div data-i18n-html="pages.linkedin.what_body" class="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 text-slate-400 leading-relaxed space-y-3">
+        <p>
+          Buscar trabajo como AI Engineer implica revisar LinkedIn diariamente para encontrar
+          ofertas recientes antes de que caduquen o se llenen de candidatos. Es un proceso manual
+          y repetitivo.
+        </p>
+        <p>
+          Este agente <strong class="text-slate-200">automatiza toda la búsqueda</strong>: lanza queries de búsqueda
+          específicas en LinkedIn (filtradas por fecha reciente y tecnología), extrae los datos de cada oferta
+          con IA, elimina duplicados y los guarda en base de datos en la nube para consulta posterior.
+          Todo ello en un pipeline autónomo que decide cuándo detenerse.
+        </p>
+      </div>
+    </section>
+
+    <!-- LangGraph concept -->
+    <section class="mb-16">
+      <h2 data-i18n="pages.linkedin.langgraph_title" class="text-2xl font-bold text-white mb-4">¿Qué es LangGraph?</h2>
+      <div class="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 text-slate-400 leading-relaxed">
+        <p data-i18n-html="pages.linkedin.langgraph_body">
+          LangGraph es un framework para construir <strong class="text-slate-200">agentes con estado</strong> como
+          grafos dirigidos. A diferencia de una cadena lineal de LangChain, LangGraph permite definir
+          <strong class="text-slate-200">nodos</strong> (funciones que procesan el estado) y
+          <strong class="text-slate-200">aristas condicionales</strong> (decisiones de flujo basadas en el estado actual).
+          Esto permite bucles, reintentos y lógica de agente real.
+        </p>
+      </div>
+    </section>
+
+    <!-- Cómo funciona -->
+    <section class="mb-16">
+      <h2 data-i18n="pages.linkedin.how_title" class="text-2xl font-bold text-white mb-8">¿Cómo funciona? Los nodos del grafo</h2>
+      <div class="space-y-4">
+
+        <div class="flex gap-5">
+          <div class="flex-shrink-0">
+            <div class="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-xs">🔍</div>
+          </div>
+          <div class="flex-1 pb-6 border-b border-zinc-800">
+            <h3 data-i18n="pages.linkedin.node1_title" class="text-white font-semibold mb-1">Nodo "buscar" — Tavily Search</h3>
+            <p data-i18n-html="pages.linkedin.node1_body" class="text-slate-400 text-sm leading-relaxed">
+              Ejecuta queries de búsqueda en LinkedIn con filtro de fecha reciente (últimas 48h).
+              Rota entre 4 queries distintas en cada ciclo para maximizar cobertura.
+              Los resultados crudos de Tavily se guardan en el estado.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-5">
+          <div class="flex-shrink-0">
+            <div class="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-xs">🤖</div>
+          </div>
+          <div class="flex-1 pb-6 border-b border-zinc-800">
+            <h3 data-i18n="pages.linkedin.node2_title" class="text-white font-semibold mb-1">Nodo "validar" — Gemini extrae y filtra</h3>
+            <p data-i18n-html="pages.linkedin.node2_body" class="text-slate-400 text-sm leading-relaxed">
+              Gemini 2.5 Flash Lite procesa el texto bruto de Tavily y extrae en JSON estructurado:
+              empresa, puesto, link, ciudad, modalidad y fecha de publicación.
+              Reglas estrictas: <strong class="text-slate-200">solo URLs de linkedin.com</strong>,
+              de-duplicación por link, y reconstrucción del Job ID para generar URLs estables.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-5">
+          <div class="flex-shrink-0">
+            <div class="w-8 h-8 rounded-full bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 font-bold text-xs">⚡</div>
+          </div>
+          <div class="flex-1 pb-6 border-b border-zinc-800">
+            <h3 data-i18n="pages.linkedin.node3_title" class="text-white font-semibold mb-1">Arista condicional — ¿Seguir o guardar?</h3>
+            <p data-i18n-html="pages.linkedin.node3_body" class="text-slate-400 text-sm leading-relaxed">
+              Tras cada ciclo de validación, el grafo decide: si hay
+              <strong class="text-slate-200">≥ 10 ofertas</strong> acumuladas o se han completado
+              <strong class="text-slate-200">≥ 5 ciclos</strong> → ir a "guardar".
+              Si no → volver a "buscar" con la siguiente query.
+              Esto crea un bucle autónomo que no para hasta tener suficientes resultados.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-5">
+          <div class="flex-shrink-0">
+            <div class="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-xs">💾</div>
+          </div>
+          <div class="flex-1">
+            <h3 data-i18n="pages.linkedin.node4_title" class="text-white font-semibold mb-1">Nodo "guardar" — PostgreSQL en la nube</h3>
+            <p data-i18n-html="pages.linkedin.node4_body" class="text-slate-400 text-sm leading-relaxed">
+              Normaliza el link de LinkedIn extrayendo el Job ID con regex para construir URLs
+              canónicas estables. Inserta cada oferta en PostgreSQL usando
+              <code class="text-yellow-300 bg-zinc-800 px-1.5 py-0.5 rounded text-xs">ON CONFLICT (link) DO NOTHING</code>
+              para evitar duplicados en ejecuciones repetidas.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Grafo visual -->
+    <section class="mb-16">
+      <h2 data-i18n="pages.linkedin.graph_title" class="text-2xl font-bold text-white mb-6">Grafo de estados (LangGraph)</h2>
+      <div class="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-8 font-mono text-xs overflow-x-auto">
+        <div class="flex flex-col gap-4 items-center min-w-[400px]">
+          <div class="px-6 py-2 bg-zinc-700/50 border border-zinc-600 rounded-full text-zinc-300">START</div>
+          <div class="text-zinc-600">↓</div>
+          <div class="px-6 py-3 bg-blue-500/10 border border-blue-500/30 rounded-xl text-blue-300 w-48 text-center">
+            🔍 search<br /><span class="text-zinc-500 text-[10px]">Tavily Search</span>
+          </div>
+          <div class="text-zinc-600">↓</div>
+          <div class="px-6 py-3 bg-purple-500/10 border border-purple-500/30 rounded-xl text-purple-300 w-48 text-center">
+            🤖 validate<br /><span class="text-zinc-500 text-[10px]">Gemini → JSON</span>
+          </div>
+          <div class="flex items-start gap-8 mt-1">
+            <div class="flex flex-col items-center gap-2">
+              <div class="text-zinc-500 text-[10px]">≥10 offers or ≥5 cycles</div>
+              <div class="text-zinc-600">↓</div>
+              <div class="px-6 py-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-300 w-44 text-center">
+                💾 save<br /><span class="text-zinc-500 text-[10px]">PostgreSQL</span>
+              </div>
+              <div class="text-zinc-600">↓</div>
+              <div class="px-6 py-2 bg-zinc-700/50 border border-zinc-600 rounded-full text-zinc-300">END</div>
+            </div>
+            <div class="flex flex-col items-center gap-1 mt-3">
+              <div class="text-zinc-500 text-[10px]">else →</div>
+              <div class="text-zinc-600">↑ loop</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Estado del agente -->
+    <section class="mb-16">
+      <h2 data-i18n="pages.linkedin.state_title" class="text-2xl font-bold text-white mb-6">Estado compartido del agente</h2>
+      <div class="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6">
+        <p data-i18n-html="pages.linkedin.state_intro" class="text-slate-400 text-sm mb-4">El estado (<code class="text-yellow-300 bg-zinc-800 px-1.5 py-0.5 rounded text-xs">EstadoAgente</code>) persiste entre nodos y contiene:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex items-start gap-3 p-3 bg-zinc-800/50 rounded-lg">
+            <code data-i18n="pages.linkedin.s1_key" class="text-yellow-300 text-xs mt-0.5 flex-shrink-0">messages</code>
+            <span data-i18n="pages.linkedin.s1_val" class="text-slate-500 text-xs">Historial de mensajes del grafo (add_messages annotation)</span>
+          </div>
+          <div class="flex items-start gap-3 p-3 bg-zinc-800/50 rounded-lg">
+            <code data-i18n="pages.linkedin.s2_key" class="text-yellow-300 text-xs mt-0.5 flex-shrink-0">ofertas_encontradas</code>
+            <span data-i18n="pages.linkedin.s2_val" class="text-slate-500 text-xs">Lista acumulada de ofertas validadas entre ciclos</span>
+          </div>
+          <div class="flex items-start gap-3 p-3 bg-zinc-800/50 rounded-lg">
+            <code data-i18n="pages.linkedin.s3_key" class="text-yellow-300 text-xs mt-0.5 flex-shrink-0">intentos</code>
+            <span data-i18n="pages.linkedin.s3_val" class="text-slate-500 text-xs">Contador de ciclos para la condición de salida</span>
+          </div>
+          <div class="flex items-start gap-3 p-3 bg-zinc-800/50 rounded-lg">
+            <code data-i18n="pages.linkedin.s4_key" class="text-yellow-300 text-xs mt-0.5 flex-shrink-0">max_ofertas</code>
+            <span data-i18n="pages.linkedin.s4_val" class="text-slate-500 text-xs">Objetivo configurable (por defecto 10 ofertas)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <div class="border-t border-zinc-800 pt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div>
+        <p data-i18n="pages.linkedin.footer_text" class="text-slate-500 text-sm">Proyecto personal · Python · LangGraph · 2025</p>
+      </div>
+      <a
+        href="https://github.com/javiluna00/AI_linkedin"
+        target="_blank"
+        class="inline-flex items-center gap-2.5 px-5 py-2.5 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-bold rounded-xl transition-all duration-200 text-sm"
+      >
+        <GithubIcon class="size-4" />
+        <span data-i18n="pages.github_cta">Ver código en GitHub</span>
+      </a>
+    </div>
+
+  </div>
+</Layout>

@@ -6,7 +6,7 @@ const EXPERIENCE = [
     {
         title: "Software Developer",
         where: "PrimeIT",
-        logo: "https://media.licdn.com/dms/image/D4D0BAQE-bvPVaIiC_Q/company-logo_200_200/0/1688397241467/primeit_espaa_logo?e=2147483647&v=beta&t=gGikvVwTtVuAfGnaTOPcNBuVkXaPVU8n2Hbb32Cinl8",
+        logo: "https://media.licdn.com/dms/image/v2/D4D0BAQFHKOWhVeLq1g/company-logo_200_200/B4DZfqRXJFGsAQ-/0/1751982109741/primeit_espaa_logo?e=2147483647&v=beta&t=zahRYZuLZ-tYfXVCnz2XusrD2d6Mtvoj8hL_BAtRpXk",
         duration: "Abril 2024 - Actualidad",
         description: "Desarrollo de aplicación web con Javascript y MeteorJS",
         skills: ["Javascript", "MeteorJS", "Git/Github", "CSS"]
@@ -37,10 +37,10 @@ const EXPERIENCE = [
 ];
 ---
 
-<div id="experience-container" class="mt-32 mb-56 relative">
-    <nav class="flex justify-start items-center gap-x-4 mb-20">
+<div id="experience-container" class="relative">
+    <nav class="flex justify-start items-center gap-x-4 mb-12">
         <ExperienceIcon class="size-8 text-indigo-400" />
-        <h2 class="text-3xl font-bold tracking-tight text-white">Experiencia</h2>
+        <h2 data-i18n="sections.experience" class="text-3xl font-bold tracking-tight text-white">Experiencia</h2>
         <div class="h-[1px] flex-1 bg-gradient-to-r from-indigo-500/50 to-transparent"></div>
     </nav>
 
@@ -52,9 +52,9 @@ const EXPERIENCE = [
         ></div>
 
         <div class="space-y-24">
-            {EXPERIENCE.map((experience) => (
+            {EXPERIENCE.map((experience, index) => (
                 <div class="experience-item relative pl-10 md:pl-24 opacity-0">
-                    
+
                     <div class="absolute left-[-15px] md:left-[-7px] top-0 z-20">
                         <div class="exp-dot size-8 md:size-12 rounded-xl bg-slate-950 border-2 border-indigo-500/30 flex items-center justify-center overflow-hidden shadow-xl bg-white">
                             {experience.logo ? (
@@ -66,7 +66,7 @@ const EXPERIENCE = [
                     </div>
 
                     <div class="exp-content">
-                        <ExperienceCard experience={experience} />
+                        <ExperienceCard experience={experience} index={index} />
                     </div>
                 </div>
             ))}

@@ -1,13 +1,13 @@
 ---
 import Pill from "./Pill.astro";
 
-const { experience } = Astro.props;
+const { experience, index } = Astro.props;
 ---
 
 <div class="group relative flex gap-x-5 transition-all duration-500">
     <div class="flex flex-col w-full pb-10">
         <div class="flex items-center gap-2 mb-3">
-            <span class="text-[10px] font-bold uppercase tracking-widest text-purple-400 bg-purple-500/10 px-2 py-1 rounded-md border border-purple-500/20">
+            <span data-i18n={`experience.${index}.duration`} class="text-[10px] font-bold uppercase tracking-widest text-purple-400 bg-purple-500/10 px-2 py-1 rounded-md border border-purple-500/20">
                 {experience.duration}
             </span>
         </div>
@@ -18,17 +18,17 @@ const { experience } = Astro.props;
             </h3>
             {experience.where && (
                 <span class="text-indigo-300/90 font-medium text-lg md:text-xl italic">
-                    @ {experience.where}
+                    @ <span data-i18n={`experience.${index}.where`}>{experience.where}</span>
                 </span>
             )}
         </div>
 
-        <p class="mt-4 text-slate-400 text-base md:text-lg leading-relaxed max-w-[65ch] text-pretty">
+        <p data-i18n={`experience.${index}.description`} class="mt-4 text-slate-400 text-base md:text-lg leading-relaxed max-w-[65ch] text-pretty">
             {experience.description}
         </p>
 
         <div class="mt-6 flex flex-wrap items-center gap-4">
-            {experience.logo && (
+            <!-- {experience.logo && (
                 <div class="p-1 bg-white rounded-lg shadow-sm group-hover:scale-110 transition-transform duration-300">
                     <img
                         class="h-8 w-auto object-contain"
@@ -36,7 +36,7 @@ const { experience } = Astro.props;
                         alt={`Logo de ${experience.where}`}
                     />
                 </div>
-            )}
+            )} -->
 
             {experience.skills && (
                 <div class="flex flex-wrap gap-2">
@@ -54,9 +54,8 @@ const { experience } = Astro.props;
 </div>
 
 <style>
-    /* Efecto de resaltado suave al pasar el ratón por la sección padre */
     .group:hover h3 {
-        color: #c084fc; /* purple-400 */
+        color: #c084fc;
         transition: color 0.3s ease;
     }
 </style>
